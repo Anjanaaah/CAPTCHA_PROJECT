@@ -1,0 +1,105 @@
+spatial_resoning_cache_bechmark
+
+In particular, we observe that most commercial VLMs (e.g., Gem
+ini, Claude, GPT, etc.) fail to effectively solve CAPTCHA
+and thus achieve low accuracy(∼ 15.7%), but our findings
+indicate that requiring the model to perform step-by-step
+reasoning before generating the final coordinates can sig
+nificantly enhance its solving accuracy, this underscoring
+the severity of the gap.
+
+difficulties faced and traditional output obtained
+ The framework operationalizes the model’s reasoning into executable actions. It
+achieves state-of-the-art performance on five high-difficulty
+CAPTCHAtypesandattains an average accuracy of 83.9%
+across all seven categories in our benchmark, substantially
+surpassing existing baselines
+
+CAPTCHAswereoriginally introduced as a security mech
+anism to distinguish humans from machines [22]. Early
+text-based CAPTCHAs exploited the limits of OCR [23],
+but advances in computer vision shifted them toward com
+plex visual–spatial puzzles requiring spatial reasoning, 3D
+mental rotation, and multi-step inference [7, 14]
+ combining VLMs with auxiliary tools and fine
+tuned model pplying commercial VLMs to solve CAPTCHAs,
+especially highly difficult tasks, achieves only an accuracy
+of 15.7%. Oncereasoning is introduced, however, performance sta
+tistically significantly improves by an average of 38.75%
+relative to the non-reasoning baseline.
+
+3.2.2. Reasoning Accuracy
+
+Tocomprehensively evaluate the quality of model-predicted
+reasoning, we design multiple new metrics for reasoning,
+each motivated by a distinct aspect of reasoning quality. We
+argue that high-quality reasoning steps should achieve high
+solving accuracy or capture maximal complexity with min
+imal reasoning cost.
+Reasoning Steps. To measure the granularity of reason
+ing, wecountthenumberofreasoningstepsinthegenerated
+textual reasoning. This metric naturally reflects the level of
+detail in the reasoning process. A larger number of steps
+typically implies a more complex reasoning trajectory, but
+also indicates reduced reasoning efficiency.
+Reasoning Length. We measure the total number of to
+kens in the generated reasoning text. In contrast to Reason
+ing Steps, which capture the structural depth of reasoning,
+this metric quantifies the overall textual length, offering a
+f
+iner-grained view of reasoning cost.
+Reasoning Efficiency. To assess the trade-off between
+predictive accuracy and reasoning cost, we define an effi
+ciency metric. Let Acci denote the accuracy of model i,
+ˆ
+Li = Li/L the normalized reasoning length, and ˆSi =
+Si/S the normalized reasoning steps. With equal weights
+α =β=0.5,efficiency is computed as
+Efficiencyi =
+Acci
+α· ˆ Li +β · ˆSi
+.
+(3)
+Values are further using min–max normalized to (0,1). In
+all, higher reasoning efficiency reflects the model achieving
+stronger accuracy with fewer steps or tokens, which is more
+efficient.
+Trajectory Complexity Index (TCI). To quantify the
+structural complexity of reasoning trajectories, we capture
+linguistic signals such as backtracking words (but, however,
+etc.) and symbolic markers (coordinates, grid indices, etc.).
+For each instance j in group i, we aggregate feature counts
+Fi,j and normalize them by group-level averages:
+zi,j =
+F
+(Fi,j − Fi)
+0.5 · (si/s) + 0.5 · (ti/t) .
+(4)
+The final TCI is obtained by applying a sigmoid function,
+which maps the feature values into the normalized range of
+(0, 1):
+
+A higher TCI indicates frequent backtracking or symbolic
+reasoning, demonstrating more complex reasoning behav
+ior.
+Reasoning Score. To evaluate how well a model’s rea
+soning aligns with the ground-truth reasoning steps, we use
+human annotations. Specifically, we recruited four domain
+experts to independently assess the quality of each gener
+ated reasoning sequence across multiple sub-dimensions.
+For each instance i, the final score is obtained by averag
+ing the four expert-provided scores:
+
+(6)
+All experts evaluated the samples in a blinded manner, and
+disagreements greater than two points triggered a second
+round review until consensus was reached. We additions
+ally report inter-rater reliability, with Krippendorff’s alpha
+of 0.78 across annotators, indicating substantial agreement.
+
+
+Reasoning Scaling Laws
+
+1)Linear Scaling Law
+2)Power Law
+3) Difficulty–Gain Scaling Law

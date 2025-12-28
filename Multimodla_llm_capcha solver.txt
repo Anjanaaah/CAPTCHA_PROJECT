@@ -1,0 +1,127 @@
+Multimodla_llm_capcha solver
+
+RQ1:Howwellcan MLLMssolve diverse visual CAPTCHA
+tasks under practical constraints such as limited time and
+retries?
+• RQ2: Howdoprompting strategies, such as direct prompt
+ing, optimized instructions, and few-shot demonstrations,
+affectsolverperformanceacrossdifferentCAPTCHAtypes?
+• RQ3: What reasoning behaviors do MLLMs exhibit during
+successful and failed attempts, and what do these behav
+iors reveal about the challenges that CAPTCHAs pose to
+automated solvers?
+• RQ4: Whatstrategies should web service providers adopt
+to deploy CAPTCHA schemes that remain effective against
+increasingly capable MLLMs?
+
+capche generally solved using?
+
+:CAPTCHA mechanisms and their corresponding solvers have continuously evolved in response to each other’s
+advancement[17,19].Traditionaltext-andimage-basedCAPTCHAs
+are weakened by deep-learning methods employing convolutional
+models and segmentation-based techniques [20, 21, 27]. More ad
+vanced architectures, including generative adversarial network
+based solvers and transformer-based recognizers, further improved
+solvers robustness against noisy and diverse schemes [30, 32]. Be
+sides visual recognition, reinforcement-learning approaches showed
+that even behavior-based CAPTCHAs can be bypassed by agents
+learning human-like interaction pattern [2, 28]. However, the 
+emergence of reasoning-based CAPTCHAs introduces semantics,
+interactive, and multi-modal designs, necessitating solvers with advanced
+logical-reasoning capabilities alongside strong image-comprehension
+skills 
+
+recent developments:With the advent of MLLMs and vision
+language models(VLMs),recent work has begun to treat CAPTCHA
+The attacker employs several prompting regimes that mirror our
+experimental settings. (i) direct prompts that forward the original
+instruction 𝑞 (Exp1); (ii) optimized prompts, where the attacker
+designs a task-specific template with clearer reasoning rules and
+output format (Exp2); and (iii) few-shot prompts, where labeled
+examples are prepended (Exp4). For each model–task-type pair, the
+prompt template is fixed during evaluation
+
+Exp1 (original prompts): Each instance is presented with the
+human-facing instruction 𝑞orig from the dataset. For every model
+and task type we perform a single invocation per sample and re
+port Pass@1 and latency. This corresponds to directly feeding the
+webpage instruction to an MLLM without any prompt engineering.
+
+Exp2 (optimized prompts): For each task type we design a
+task-specific prompt template𝑞opt that standardizes the instruction,
+clarifies rules, and imposes a strict output format. All other settings
+are identical to Exp1. Comparing Exp1 and Exp2 isolates the effect
+of task-level prompt engineering.
+
+Exp3 (finite-retry regime): We consider an “until-correct” strat
+egy where the attacker can attempt up to 𝑘 challenges of the same
+type, stopping upon the first success or when a retry cap is reached.
+Instead of explicitly running all such sequences, we extrapolate
+Success@k and the expected number of calls from Exp2’s single
+shot accuracy using a Bernoulli model (Section 4.5), and empirically
+validate this approximation on a subset of tasks.
+
+Exp4 (few-shot guidance on hard tasks): For the hardest task
+types identified in Exp2, we prepend two manually verified exam
+ples as few-shot demonstrations. At inference time, the model first
+sees these example image–instruction–answer pairs, followed by
+the test instance with the same optimized instruction. All decoding
+parameters and parsing rules remain identical to Exp2.
+
+Results observed
+Brokentypes:tasktypeswhosecross-modelaveragePass@1
+exceeds40%inbothExp1andExp2.Thisgroupcontains
+recognitionandsimplegrid-basedfamiliessuchasPath_Finder,
+Select_Animal,Misleading_Click,Image_Recognition,Bingo,
+Object_Match,Unusual_Detection,Image_Matching,Coor
+dinates,Connect_Icon,andDart_Count.
+•Borderlinetypes:Geometry_Clickremainsbelow40%on
+averagebutshowsclearupwardtrendswhenpromptsare
+optimized;weconservativelytreatitaseffectivelybroken.
+•Hardtypes:Patch_Select,Rotation_Match,Click_Order,
+Pick_Area,Place_Dot,andDice_Countstaybelow20%
+
+
+Hard and robust features considered
+
+Countingandaggregationbeyondpatternrecognition:Dic
+e_Countandcounting-basedvariantsofPick_Areacouplevisual
+recognitionwithexplicit countingandlight-weightarithmetic.
+
+Stabilityacrossmodelsandpromptingregimes:Click_Order,
+Place_Dot,Pick_Area,Dice_Count,andPatch_Selectremainhard
+forallevaluatedmodelsunderdirectpromptingandoptimized
+prompts,andtheystayhardevenwithtask-specificfew-shotdemon
+strations.
+
+Design specifications
+
+Favorcontinuous-spacelocalizationoverdiscretechoice:
+Wherepossible,basethepass/faildecisionontheuser’sability
+toclick,drag,ordrawwithinacontinuousimage,withalimited
+toleranceband,ratherthanonselectingoneofasmallnumberof
+buttonsortiles.TasksinthespiritofClick_Order,Place_Dot,and
+Pick_Area—whereasemanticinstructionmustbegroundedinto
+specificpositionsorregions—arestructurallyharderforcurrent
+MLLMsthanpre-labeledmultiple-choicegrids.
+
+Coupleperceptionwithcountingandsimplearithmetic:In
+steadofaskingwhichtilescontainacertainobject,prefertasksthat
+requirecountingsmallobjectsoraggregatingvisualevidenceinto
+anumericanswer,asinDice_Countorcounting-basedPick_Area.
+Evensimplearithmetic(e.g.,summingsmallnumbers) interacts
+poorlywithcurrentvisualpipelineswhilebeingeasyforhumans,
+butcountsshouldremainsmalltoavoidexcessiveuserburden.
+
+Combinemultiplehardnessfactorsinasinglechallenge:
+Asinglechallengecanrequireuserstolocateseveral small,vi
+suallysimilarobjectsinaclutteredscene, interactwiththemin
+aprescribedorder,andoptionallyreportanaggregatequantity.
+Suchcompositionsremainnatural forhumanswhenscenesare
+notoverlycrowded,but forceMLLMstosolveseveralcoupled
+subproblemsthatcurrentarchitectureshandleunreliably.
+
+Preserveusabilityandplanforevolution:Operatorsshould
+regularlyre-evaluatetheirschemesagainstup-to-dateMLLMs,
+monitorsolveratesandsuspicioustraffic,andbepreparedtorotate
+oradjusttemplatesasempiricalhardnesserodes.

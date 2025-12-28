@@ -1,0 +1,51 @@
+Keystoke detection using LLMs
+
+Intoduction
+
+In response, systems like Google’s reCAPTCHA have shifted towards behavioral analysis, monitoring user interactions
+to generate a risk score [2]. While effective, these systems often operate as "black boxes" and raise privacy concerns
+due to extensive user data tracking
+
+The concept of using automated tests to distinguish humans from computers was formalized by von Ahn et al. [1],
+leading to the first generation of text-based CAPTCHAs. As these became vulnerable to optical character recognition
+(OCR) algorithms, subsequent iterations introduced image-based challenges. However, the efficacy of these visual
+puzzles has been significantly diminished by modern convolutional neural networks [3].
+Keystroke dynamics is a well-established field within behavioral biometrics, primarily used for continuous authentication
+and user re-verification [4]. The rhythm and cadence of typing produce a unique signature that can be used to verify a
+user’s identity. Research in this area has identified numerous features, such as dwell time (duration of a key press) and
+light time (time between key presses), that are effective for modeling user-specific patterns [5].
+The proposed system is designed based on a secure client-server architecture. In this model, the client-side interface is
+responsible for rendering challenges and capturing user input, while a trusted backend server manages all sensitive
+operations. This includes making secure API calls to the LLM to generate challenges and performing the final
+validation of both the user’s answer and their behavioral data. This separation of concerns prevents exposure of sensitive
+information (like API keys or correct answers) on the client side.
+
+API call and securing it
+
+// Example LLM JSON Response
+{
+"question": "What color is the sky on a clear day?",
+"answer": "blue"
+}
+Upon receiving the response, the backend computes the SHA-256 hash of the answer and transmits only the question
+and the hash to the client, ensuring the plaintext answer is never exposed
+
+Parameters considered
+
+ Total Typing Duration (Ttotal): The total time elapsed from the first to the last keystroke. Ttotal = tn − t1.
+2. Mean Latency (µF): The average time between key presses.
+3. Standard Deviation of Latency (σF): The variability in the typing rhythm. This is a key feature, as human
+typing is inherently less uniform than that of simple scripts
+
+Conclusion and future work
+
+ Advanced Behavioral Modeling: We plan to replace the current heuristic classifier with a machine learning
+model, such as a one-class Support Vector Machine (SVM) or an autoencoder. By training on a large dataset
+of human typing patterns, these models can create a more nuanced and robust classification boundary, making
+it significantly harder for sophisticated bots to evade detection.
+2. Multi-modal Biometrics: Keystroke dynamics can be augmented with other behavioral signals. We will
+investigate incorporating mouse movement analysis, tracking features like cursor velocity, acceleration, and
+path curvature to build a richer, multi-modal behavioral profile.
+3. Performance and Scalability Analysis: A comprehensive analysis of the system’s performance under load is
+required. This includes studying the latency overhead of the LLM API calls and optimizing the client-server
+communication protocol for a production environment.

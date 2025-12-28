@@ -1,0 +1,36 @@
+Image Based capcha (image features are extracted using CNN model)
+
+Models Used
+
+VGG16andResNet-101
+
+Dataset
+ 
+to recognize into  four test datasets(normal, stylized, adversarial, and
+stylized adversarial),eachcontainingthesame1000blendedimagesfrom100categories,
+eachwith10testingimages,fromtheImageNetdataset(Section5.1).The selection networks
+are trained on the selection imageset(Section5.1),containing10,000user-friendlyhand
+labeledimagesfrom100classes,with100imagesineach.Table6depictsarealsamplein
+the evaluation process.Weperformedevaluationsonnormalversions,usingoriginalimagesfromtheIm
+ageNetdatasetandrandomcharactersfromEMNIST(Section5.1)withdistortionopti
+mization
+
+Additional Techniques used
+
+Thesameevaluationswereperformedonstylizedversionsimplemented
+bytheneural-style-transfertechnique(Section4.1),adversarialexampleversionsimple
+mentedbytheadversarialexampletechnique(Section4.2),andblendedversionsofthe
+stylizationandadversarialexampletechniques..Characterlengthsl,rangingfromthree
+tofive,werealsostudiedforsecurityperformance.Table7depictsthelevelofsecurityof
+theBPDAalgorithm(Section4.2.2),whereasTable8depictsthesecurityperformanceof
+theFGSMalgorithm
+
+Results
+
+These result tables show that image stylization still
+influencestherecognitionofneuralnetworksmorethannormalversions,whereasadver
+sarialexamplesclearlyhaveaconsiderablygreateffectonfoolingtheneuralnetworks.
+As a result,combiningstylizationandadversarialexamplesyieldsthestrongestversion
+with the highest fool in grateon neural networks(successrecognitionrateslowerthan45%).
+Furthermore,theresultprovedthatthelongerthetext,thehighertherateofdeceptionon
+neural networks

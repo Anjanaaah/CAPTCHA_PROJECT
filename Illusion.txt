@@ -1,0 +1,190 @@
+Illusion
+
+In this paper, we first investigate the performance of multi
+modal LLMs on the task of CATPCHA solving. We evaluate two
+state-of-the-art models, GPT-4o [5] and Gemini 1.5 pro 2.0 [23],
+across different types of CAPTCHAs (e.g., text-based, image-based,
+and reasoning-based CAPTCHAs). We employ Zero-Shot prompt
+ing [19] and the Chain-of-Thought (CoT) prompting [28] as our
+primary methodologies. Additionally, we conducted a user study
+to assess how many attempts human users typically need to suc
+cessfully pass these CAPTCHAs, which has not been considered in
+any papers before [7, 20].
+Theresults of our investigation reveal four key insights: (1) LLMs
+perform better on text-based CAPTCHAs compared to image-based
+and reasoning-based CAPTCHAs. (2) While LLMs struggle with
+complex reasoning CAPTCHAs, their performance improves when
+using the CoT prompting, suggesting that with reasoning chains,
+LLMs have the potential to solve such challenges. This indicates
+that current CAPTCHAsmaynolongerbeassecureasintended. (3)
+Our user study shows that although reasoning-based CAPTCHAs
+are difficult for AI to solve, they are also challenging for human
+users. These challenges can even frustrate users, diminishing their
+patience during attempts. (4) Finally, our study reveals that human
+users often make the same mistakes as LLMs, underscoring the
+need to develop methods that can effectively differentiate between
+LLMs and human users.
+
+Results found 
+
+We conducted a systematic empirical study to investigate the
+effectiveness of LLMs on CAPTCHAs and found that current
+CAPTCHAs are no longer secure. Furthermore, our user study
+reveals that, in most circumstances, users are unable to pass the
+current CAPTCHAs on their first attempt. To the best of our
+knowledge, this is the first study that systematically surveys
+LLMeffectiveness on CAPTCHAs.
+• WeintroduceIllusionCAPTCHA,thefirstillusion-basedCAPTCHA
+that leverages the unique ability of the human brain to process
+visual information. Additionally, our step-by-step questioning
+approach effectively encourages bots to make predictable mis
+takes.
+• We evaluate our method using two state-of-the-art models, GPT
+4o and Gemini 1.5 pro 2.0. The experimental results demonstrate
+that our strategy effectively presents challenges for AI models
+to solve the generated CAPTCHAs, rendering it AI-hard, while
+simultaneously remaining accessible and straightforward for
+human users to navigate. This dual capability ensures that our
+CAPTCHAnotonlyenhancessecurityagainst automated attacks
+but also provides a user-friendly experience, bridging the gap
+between robust security measures and usability.
+
+
+Data Collection
+
+Dataset Collection. To rigorously assess the ability of LLMs to
+solve CAPTCHAs, we include the three types of CAPTCHAs as dis
+cussed in the Background: text-based, image-based and reasoning
+based CAPTCHAs. In particular, we exclude audio CAPTCHAs
+due to their limited usage online [9], which is mainly for visually
+impaired people. Furthermore, our study emphasizes real-world
+scenarios, so all CAPTCHAs used were collected from website applications.
+ Consequently, we built a dataset comprising three types of
+CAPTCHA(text-based CAPTCHAsshowninFigure1,image-based
+CAPTCHAs shown in Figure 2 and reasoning-based CAPTCHAs
+shown in Figure 3 each containing 30 capthchas per subdivision.
+
+Methodology
+
+To evaluate these CAPTCHAs, we employ two powerful 
+LLMs (Gemini 1.5 pro 2.0 and GPT4-o) using both Zero-Shot
+and Chain-of-Thought (COT) methodologies. Each CAPTCHA 
+category presents a unique set of challenges that require customized
+solution strategies. As a result, we utilize different LLM prompts
+to predict the outcomes of various CAPTCHAs, measuring suc
+cess rates as our primary metric. We manually analyze each LLM
+response to ensure the accuracy of the results. In the zero-shot
+approach, a solution is considered correct only if the LLM outlines
+the exact procedure to solve the CAPTCHA. In contrast, in the CoT
+approach, a substep is deemed successful if the LLM’s proposed
+solution for that specific sub-step is accurate. 
+
+
+Cases considered and there results
+
+RQ1
+ How effective are LLMs in accurately solving CAPTCHAs, 
+and what types of errors are they most likely to
+make?
+verification experiment reveals that (1) LLMs
+perform better on text-based CAPTCHAs compared to image-based
+and reasoning-based CAPTCHAs; and (2) although LLMs struggle
+with complex reasoning CAPTCHAs, their performance significantly
+improves when employing the Chain-of-Thought (CoT) strategy. This
+suggests that with reasoning chains, LLMs have the potential to
+overcome these challenges. Consequently, this indicates that current
+CAPTCHAs may no longer be as secure as intended
+
+• RQ2(User Study): Are human users able to effectively resolve
+various categories of CAPTCHA challenges, and what specific
+obstacles do they encounter throughout the process?
+The result of our user study reveals that (1) While
+reasoning-based CAPTCHAs pose significant challenges for AI sys
+tems, they are also difficult for human users. Hence, these CAPTCHAs
+can easily frustrate users, leading to diminished patience during their
+attempts. (2) Human users frequently make the same mistakes as
+LLMs, highlighting the need to develop methods that can effectively
+distinguish between LLMs and human users
+
+RQ3Human Identification of Illusionary Images
+Genral Question Asked
+Do you notice any illusionary effect in this image?”
+
+Optional questions asked
+: “If you are
+uncertain, could you please explain why?”
+
+Mandatory questions asked 
+: “If you answered
+‘Yes’ or ‘No’ regarding the perception of an illusion, how con
+f
+ident are you in your response? Please rate on a scale from 1
+(least confident) to 5 (most confident).”
+“What do you observe in this image?
+: “How confident are you in your description of the image? Rate from 1 (least
+confident) to 5 (most confident).”
+
+Result 
+The key results from this survey are summa
+rized in Table 3, 10 participants taking part in this questionnaire.
+In terms of visibility, the data reveals that human users were able
+to accurately identify 83% of illusionary text and 88% of illusionary
+images on average. This suggests a relatively strong ability to rec
+ognize deceptive or distorted content in both formats of illusionary
+content.
+Additionally, the confidence metric provides insight into the
+users’ perception of their own performance. The majority of partic
+ipants reported high levels of confidence in their selections, indicat
+ing that they believed they were making correct judgments, even
+when faced with illusionary or complex content. This confidence
+may play a crucial role in how users engage with tasks that involve
+visual and textual interpretation, highlighting the special structure
+of human vision
+
+RQ4
+
+. To rigorously test our generated illusionary content, we
+adopt the same settings as our empirical study in Section 4, employ
+ing 30 generated illusionary images. In contrast to our empirical
+study, this section aims to demonstrate that LLMs are unable to
+identify illusionary content
+
+Result
+
+under both Zero-Shot and COT reasoning settings,
+neither GPT nor Gemini successfully identified the illusionary im
+ages, achieving a 0% success rate. Notably, when using COT, GPT
+wasabletodiscern the shape ofahiddencharacter within the image
+but failed to accurately name the character, even when provided
+with a hint. These results suggest that visual illusions are particu
+larly challenging for current LLMs to identify, underscoring their
+effectiveness as natural CAPTCHAs
+
+ RQ5:Effectiveness of Inducement Prompt
+
+In this evaluation, we test GPT-4o and Gemini 1.5 Pro
+2.0. We employ two prompt settings Zero-Shot and COT, to assess
+their performance. Additionally, we allow LLMs two attempts to
+identify CAPTCHAs,leveragingtheirabilitytoretaincontextacross
+interactions. For this experiment, we utilize 30 IllusionaryCaptchas
+as the target images.
+
+Result
+
+ LLMs consistently selected the option we predicted they would
+choose, suggesting that the models were identifying only the gen
+erated content and not focusing on what we intended human users
+to recognize. Additionally, we observed that the LLMs often se
+lected the longest description of the images, indicating a tendency
+to overlook the core elements of the visual illusion. This behavior
+highlights a key limitation in the LLMs’ ability to process visual con
+text effectively, as they appear to prioritize the length or complexity
+of the descriptions rather than engaging with the nuanced visual
+details. This finding suggests that while LLMs perform well with
+textual analysis, they may struggle when tasked with interpreting
+visual content that requires deeper contextual understanding or
+inference, such as illusionary images.
+
+RQ6
+One of the primary aims of our CAPTCHA is to facilitate easier identification of images by human users. Therefore, it is
+crucial to demonstrate that our CAPTCHA is more user-friendly.

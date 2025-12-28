@@ -1,0 +1,31 @@
+Text based capcha(image features are extracted using cnn model)
+
+
+ Step1,textimage creation: for each group, select three to five letters at random from
+EMNIST. The characters of each group are distorted [4.3], and parameter O is used to
+control the overlap between two characters, with the default value for O being 0. The
+• Step 1, text image creation: for each group, select three to five letters at random from 
+EMNIST. The characters of each group are distorted [4.3], and parameter  is used 
+to control the overlap between two characters, with the default value for  being 0. 
+The text from three groups are then concatenated to form a whole CAPTCHA with a 
+white background. The size of a whole text-based CAPTCHA is 256 × 768. 
+text from three groups are then concatenated to form a whole CAPTCHA with a white
+background. The size of a whole text-based CAPTCHA is 256 × 768.
+• Step2,topic image selection: from the ImageNet dataset, choose a random image of
+the global topic, called the topic image.
+• Step 2, topic image selection: from the ImageNet dataset, choose a random image of 
+the global topic, called the topic image. 
+• Step3,style image selection: from the ImageNet dataset, choose a random image for
+the style image.
+• Step 3, style image selection: from the ImageNet dataset, choose a random image for 
+the style image. 
+• Step4, fusion: by using seamless cloning [48], the fusion machine merges the text
+image with the topic image to create the content image. This content image is then
+style transferred from the style image by the neural-style-transfer method. Finally, the
+• Step 4, fusion: by using seamless cloning [48], the fusion machine merges the text 
+image with the topic image to create the content image. This content image is then 
+style transferred from the style image by the neural-style-transfer method. Finally, 
+the stylized image is transformed into an adversarial example to cause misclassifica
+tion of the CNN/DNN networks.  
+stylized image is transformed into an adversarial example to cause misclassification of
+the CNN/DNNnetworks

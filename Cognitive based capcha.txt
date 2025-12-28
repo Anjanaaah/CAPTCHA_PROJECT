@@ -1,0 +1,26 @@
+Cognitive based capcha 
+
+what is  congnitive based capcha?
+
+Cognitive-based CAPTCHA refers to CAPTCHA that is based on cognitive abilities.
+Cognitive talents are brain-based abilities that result from a unique blend of neurobiological
+and psychological techniques. Human cognition and behavior include knowledge, con
+centration, memory, judgment and appraisal, reasoning and calculation, problem solving,
+and decision making. These CAPTCHA approaches use biometric (something you are),
+physical (something you have), and knowledge-based (something you know) variables
+Cognitive-based CAPTCHA refers to CAPTCHA that is based on cognitive abilities. 
+Cognitive talents are brain-based abilities that result from a unique blend of 
+neurobiological and psychological techniques. Human cognition and behavior include knowledge, 
+concentration, memory, judgment and appraisal, reasoning and calculation, problem 
+solving, and decision making. These CAPTCHA approaches use biometric (something 
+you are), physical (something you have), and knowledge-based (something you know) 
+variables with or without the assistance of sensors such as a gyroscope or accelerometer 
+to discriminate between humans and bots. In this work, the cognitive-based CAPTCHA 
+is built by embedding the cognitive characteristics of knowledge, associated, and experience to the whole
+
+Types of cognitive capcha?
+
+1.Experience based
+2.Associate based
+3.Knowledge based
+4.cognitive based
